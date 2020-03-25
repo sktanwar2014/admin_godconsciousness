@@ -3,6 +3,7 @@ import Header from '../SubComponent/Header.js'
 import Sidebar from '../SubComponent/Sidebar.js'
 import Footer from '../SubComponent/Footer.js'
 import api from '../../api/APIs.js'
+import { Link } from 'react-router-dom';
 
 export default function Contact() {
  
@@ -92,8 +93,11 @@ export default function Contact() {
                              
                               <td> 
                                 <center>
-                                  <i class="fas fa-edit" style={{fontSize:'20px', paddingLeft:'10px',fontWeight:'normal'}}></i>
-                                  <i class="fas fa-trash-alt"style={{fontSize:'20px',paddingLeft:'10px',fontWeight:'normal'}}></i>
+                                <Link to= {{pathname:"/Updatecontact", state : {type:'contact', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch3"/>
+                      <label class="custom-control-label" for="customSwitch3"></label>
+                    </div>
                                 </center>
                               </td>                          
                             </tr>
@@ -104,42 +108,7 @@ export default function Contact() {
                   
                   </table></div>
                   </div>
-                  <div className="row">
-                    <div className="col-sm-12 col-md-5">
-                      <div className="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 41 to 50 of 57 entries</div>
-                    </div>
-                    <div className="col-sm-12 col-md-7">
-                      <div className="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                      <ul className="pagination">
-                         <li className="paginate_button page-item previous disabled" id="example2_previous">
-                          <a href="#" aria-controls="example2" data-dt-idx={0} tabIndex={0} className="page-link">Previous</a>
-                         </li>
-                         <li className="paginate_button page-item active">
-                          <a href="#" aria-controls="example2" data-dt-idx={1} tabIndex={0} className="page-link">1</a>
-                         </li>
-                         <li className="paginate_button page-item y ">
-                          <a href="#" aria-controls="example2" data-dt-idx={2} tabIndex={0} className="page-link">2</a>
-                         </li>
-                         <li className="paginate_button page-item ">
-                          <a href="#" aria-controls="example2" data-dt-idx={3} tabIndex={0} className="page-link">3</a>
-                         </li>
-                         <li className="paginate_button page-item ">
-                          <a href="#" aria-controls="example2" data-dt-idx={4} tabIndex={0} className="page-link">4</a>
-                         </li>
-                         <li className="paginate_button page-item ">
-                          <a href="#" aria-controls="example2" data-dt-idx={5} tabIndex={0} className="page-link">5</a>
-                         </li>
-                         <li className="paginate_button page-item ">
-                           <a href="#" aria-controls="example2" data-dt-idx={6} tabIndex={0} className="page-link">6</a>
-                          </li>
-                          <li className="paginate_button page-item next" id="example2_next">
-                            <a href="#" aria-controls="example2" data-dt-idx={7} tabIndex={0} className="page-link">Next</a>
-                          </li>
-                      </ul>
-
-                      </div>
-                    </div>
-                  </div>
+                  
 
                                        
             </div>

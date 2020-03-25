@@ -2,7 +2,7 @@ import React,{Component, useState, useEffect} from 'react';
 import Header from '../SubComponent/Header.js';
 import Footer from '../SubComponent/Footer.js';
 import Sidebar from '../SubComponent/Sidebar.js';
-
+import { Link } from 'react-router-dom';
 
 // API Call
 import APIs from '../../api/APIs.js';
@@ -28,6 +28,7 @@ export default function EventList() {
             <section>
               <Header />
               <Sidebar/>
+              
                 <div className="content-wrapper" style={{minHeight: '1200.88px'}}>
                   {/* Content Header (Page header) */}
                   <section className="content-header">
@@ -57,7 +58,7 @@ export default function EventList() {
            
            
           <div className="col-sm-1"style={{float:'right'}}>  
-            <button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button>
+          <Link to= {{pathname:"/AddEvent"}}><button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
           </div>  
           </div>
         </div>
@@ -176,6 +177,7 @@ export default function EventList() {
 </div>
 
 <Footer />
+
 </section>
         )
     }

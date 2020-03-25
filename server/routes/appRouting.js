@@ -22,10 +22,16 @@ Routing.route("/getobes").get(obe.getobes);
 
 const contact = require('../controllers/Contact.js');
 Routing.route("/getcontact").get(contact.getcontact);
+Routing.route("/updateContact").post(contact.updateContact);
 
 
 const about = require('../controllers/about.js');
-Routing.route("/getabout").get(contact.getabout);
+Routing.route("/getabout").get(about.getabout);
 
+const updatecontact = require('../controllers/updatecontact.js')
+Routing.route("/changeState").post(updatecontact.changeState);
+
+// const addevent = require('../controllers/addevent.js')
+// Routing.route("/addevent").post(addevent.addevent );
 
 module.exports = Routing;

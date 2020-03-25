@@ -73,6 +73,35 @@ export default {
       throw error;
     }
   },
+  changeState:async ({...payload }) => {
+    const URL = `${c.API_CONSUMER}/api/changeState`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+      return data;
+    } catch (error) {
+      checkError(error);
+      throw error;
+    }
+  },
+  updateContent:async ({...payload }) => {
+    console.log(payload)
+    const URL = `${c.API_CONSUMER}/api/updateContent`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+      return data;
+    } catch (error) {
+      checkError(error);
+      throw error;
+    }
+  },
+
+
   getabout: async ({...payload }) => {
     const URL = `${c.API_CONSUMER}/api/getabout`;
     console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
@@ -83,5 +112,9 @@ export default {
       throw error;
     }
   },
+
+
+  
+
 }; 
 
