@@ -10,7 +10,7 @@ import Direction from './Component/Direction/Direction.js'
 import obe from './Component/Obe/obe.js'
 import Contact from './Component/Contact/Contact.js';
 import updatecontact from './Component/Contact/updatecontact.js'
-import AddEvent from './Component/Event/AddUpdate.js';
+import UpdateEvent from './Component/Event/UpdateEvent.js';
 function App() {
   return (
     <Router>
@@ -24,7 +24,7 @@ function App() {
         <Route path="/obe" component={obe} />   
         <Route path="/Contact" component={Contact} />  
         <Route exact path="/updatecontact" component={updatecontact} />
-        <Route exact path="/AddEvent" component={AddEvent} />
+        <Route exact path="/UpdateEvent" component={UpdateEvent} />
       </Switch>
     </Suspense>
       </Router>

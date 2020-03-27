@@ -31,7 +31,10 @@ updatecontact.prototype.updateContactForm = function () {
      
   
       connection.changeUser({database : dbName});
-      connection.query('UPDATE contact SET email_add = "'+that.email_add+'", address = "' + that.address + '", phone_no = "' +that.phone_no+ '" WHERE id = "'+that.id+'"', function (error, rows, fields) { 
+      connection.query('UPDATE contact SET email_add = "'+that.email_add+'", address = "'
+       + that.address + '", phone_no = "'
+        +that.phone_no+ '" WHERE id = "'+that.id+'"', 
+        function (error, rows, fields) { 
         if (error) {  console.log("Error...", error); reject(error);  }          
         resolve(rows);              
       });

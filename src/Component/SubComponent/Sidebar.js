@@ -111,12 +111,7 @@ export default class Sidebar extends Component {
                     <p>About GC</p>
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a href="./index2.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Footer</p>
-                  </a>
-                </li>
+               
                 <li className="nav-item">
                   <a href="./index3.html" className="nav-link">
                     <i className="far fa-circle nav-icon" />

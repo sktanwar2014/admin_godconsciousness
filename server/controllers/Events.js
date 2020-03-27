@@ -11,10 +11,31 @@ const getEvents = async function (req, res, next) {
     }
 }
 
-
+const updateEvent = async function (req, res, next) {
+    let params = {
+        title : req.body.title,
+        description : req.body.description,
+        posted_by: req.body.posted_by,
+        posted_on : req.body.posted_on,
+        id: req.body.id,
+    }
+    try {
+        const newActivity = new contacts(params);
+        const result = await newActivity.updateEvent();
+        if(result !==undefined && result !== null && result !== ""){
+            res.send(true);
+        }else{
+            res.send(false);
+        }        
+    } catch (err) {
+        nexAt(err);
+    }
+}
 
 
 
 module.exports = {    
-    getEvents : getEvents
+    getEvents : getEvents,
+    updateEvent : updateEvent
+
 };
