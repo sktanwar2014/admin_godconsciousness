@@ -58,7 +58,7 @@ export default function EventList() {
            
            
           <div className="col-sm-1"style={{float:'right'}}>  
-          <Link to= {{pathname:"/AddEvent"}}><button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
+          <Link to= {{pathname:"/InsertEvent"}}><button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
           </div>  
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function EventList() {
                               <td>{data.posted_on}</td>
                               <td> 
                                 <center>
-                                   <Link to= {{pathname:"/Updatecontact", state : {type:'contact', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
+                                <Link to= {{pathname:"/updateEvent", state : {type:'event', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
                                   <i class="fas fa-trash-alt"style={{fontSize:'20px',paddingLeft:'10px',fontWeight:'normal'}}></i>
                                 </center>
                               </td>                          

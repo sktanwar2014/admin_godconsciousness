@@ -9,14 +9,14 @@ import {Redirect} from 'react-router-dom';
 // import api
 import FetchAPI from '../../api/APIs.js';
 
-export default function EventEditor(mainProps) {
+export default function MiracleEditor(mainProps) {
   const props = mainProps.location.state;
   
 
  console.log(props)
 
   
-  const [inputs, setInputs] = useState({id: '', title:'', description:'', posted_by: '',posted_on: ''});  
+  const [inputs, setInputs] = useState({id: '', title:'', descrpition:'', created_by: '',created_on: ''});  
 
   const handleChange  = (props) => {
     setInputs({...inputs, [props.target.name]: props.target.value});
@@ -24,18 +24,18 @@ export default function EventEditor(mainProps) {
 
   useEffect(() => {
     if(Object.keys(props)[2] === 'data'){
-      setInputs({id : props.data.id,title: props.data.title , description: props.data.description,posted_by: props.data.posted_by, posted_on: props.data.posted_on })
+      setInputs({id : props.data.id,title: props.data.title , descrpition: props.data.descrpition,created_by: props.data.created_by, created_on: props.data.created_on })
     }
   },[])
 
 
 
   const handleSubmit = async () => {
-    if(inputs.id !== '',inputs.title !=='' && inputs.description !== '' && inputs.posted_by !=='' && inputs.posted_on ){
+    if(inputs.id !== '',inputs.title !=='' && inputs.descrpition !== '' && inputs.created_by !=='' && inputs.created_on ){
       try{
         
-        const response = await FetchAPI.updateEvent({id:inputs.id,  title: inputs.title, description: inputs.description, posted_by: inputs.posted_by, posted_on: inputs.posted_on });
-console.log(response)
+        const response = await FetchAPI.updateMiracle({id:inputs.id,  title: inputs.title, descrpition: inputs.descrpition, posted_by: inputs.posted_by, posted_on: inputs.posted_on });
+         console.log(response)
         // if(response.is_successful === true){
         //     mainProps.history.push(pathLink);
         // }else {
@@ -57,10 +57,10 @@ console.log(response)
       method: methodType
     });
 
-    const URL = `http://localhost:5000/api/updateEvent`;
+    const URL = `http://localhost:5000/api/updateMiracle`;
     try {
       const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
-        data: { id: inputs.id,title: inputs.title, description: inputs.description, posted_by: inputs.posted_by, posted_on: inputs.posted_on},
+        data: { id: inputs.id,title: inputs.title, descrpition: inputs.descrpition, created_by: inputs.created_by, created_on: inputs.created_on},
       }),
     );
       return data;
@@ -100,7 +100,7 @@ console.log(response)
                   <div className="title-block">
                     
                     <h3 className="title"> 
-                    Update Event
+                    Update Miracle
 
 
                     <a href= "/Contact" >
@@ -131,19 +131,19 @@ console.log(response)
                       <div className="form-group row">
                         <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Description </label>
                         <div className="col-sm-10">
-                        <input type="text" id="description" class="form-control py-2" value={inputs.description} required/>                          
+                        <input type="text" id="description" class="form-control py-2" value={inputs.descrpition} required/>                          
                         </div>
                       </div>
                       <div className="form-group row">
-                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Posted_by </label>
+                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Created_by </label>
                         <div className="col-sm-10">
-                        <input type="text" id="posted_by" class="form-control py-2" value={inputs.posted_by} required/>                          
+                        <input type="text" id="posted_by" class="form-control py-2" value={inputs.created_by} required/>                          
                         </div>
                       </div>
                       <div className="form-group row">
-                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Posted_on </label>
+                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Created_on </label>
                         <div className="col-sm-10">
-                        <input type="date" id="posted_on" class="form-control py-2" value={inputs.posted_on} required/>                          
+                        <input type="date" id="posted_on" class="form-control py-2" value={inputs.created_on} required/>                          
                         </div>
                       </div>
                       <div className="form-group row">

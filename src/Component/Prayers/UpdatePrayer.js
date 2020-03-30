@@ -9,14 +9,14 @@ import {Redirect} from 'react-router-dom';
 // import api
 import FetchAPI from '../../api/APIs.js';
 
-export default function EventEditor(mainProps) {
+export default function PrayerEditor(mainProps) {
   const props = mainProps.location.state;
   
 
  console.log(props)
 
   
-  const [inputs, setInputs] = useState({id: '', title:'', description:'', posted_by: '',posted_on: ''});  
+  const [inputs, setInputs] = useState({id: '', prayer:''});  
 
   const handleChange  = (props) => {
     setInputs({...inputs, [props.target.name]: props.target.value});
@@ -24,17 +24,17 @@ export default function EventEditor(mainProps) {
 
   useEffect(() => {
     if(Object.keys(props)[2] === 'data'){
-      setInputs({id : props.data.id,title: props.data.title , description: props.data.description,posted_by: props.data.posted_by, posted_on: props.data.posted_on })
+      setInputs({id : props.data.id,prayer: props.data.prayer})
     }
   },[])
 
 
 
   const handleSubmit = async () => {
-    if(inputs.id !== '',inputs.title !=='' && inputs.description !== '' && inputs.posted_by !=='' && inputs.posted_on ){
+    if(inputs.id !== '',inputs.prayer!==''){
       try{
         
-        const response = await FetchAPI.updateEvent({id:inputs.id,  title: inputs.title, description: inputs.description, posted_by: inputs.posted_by, posted_on: inputs.posted_on });
+        const response = await FetchAPI.updatePrayer({id:inputs.id,  prayer: inputs.prayer});
 console.log(response)
         // if(response.is_successful === true){
         //     mainProps.history.push(pathLink);
@@ -57,10 +57,10 @@ console.log(response)
       method: methodType
     });
 
-    const URL = `http://localhost:5000/api/updateEvent`;
+    const URL = `http://localhost:5000/api/updatePrayer`;
     try {
       const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
-        data: { id: inputs.id,title: inputs.title, description: inputs.description, posted_by: inputs.posted_by, posted_on: inputs.posted_on},
+        data: { id: inputs.id,prayer: inputs.prayer},
       }),
     );
       return data;
@@ -100,7 +100,7 @@ console.log(response)
                   <div className="title-block">
                     
                     <h3 className="title"> 
-                    Update Event
+                    Update Prayers
 
 
                     <a href= "/Contact" >
@@ -123,12 +123,12 @@ console.log(response)
                         </div>
                       </div>
                       <div className="form-group row">
-                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Title </label>
+                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Prayer </label>
                         <div className="col-sm-10">
-                          <input className="form-control boxed" placeholder type="text" value = {inputs.title}  name="title" onChange={handleChange } required />                          
+                          <input className="form-control boxed" placeholder type="text" value = {inputs.prayer}  name="prayer" onChange={handleChange } required />                          
                         </div>
                       </div>
-                      <div className="form-group row">
+                      {/* <div className="form-group row">
                         <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Description </label>
                         <div className="col-sm-10">
                         <input type="text" id="description" class="form-control py-2" value={inputs.description} required/>                          
@@ -145,7 +145,7 @@ console.log(response)
                         <div className="col-sm-10">
                         <input type="date" id="posted_on" class="form-control py-2" value={inputs.posted_on} required/>                          
                         </div>
-                      </div>
+                      </div> */}
                       <div className="form-group row">
                         <div className="col-sm-10 col-sm-offset-2">
                           <button type="button"  className="btn btn-primary" onClick={handleSubmit()} style={{marginLeft:'20px'}}>   Update </button>

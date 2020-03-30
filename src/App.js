@@ -11,6 +11,11 @@ import obe from './Component/Obe/obe.js'
 import Contact from './Component/Contact/Contact.js';
 import updatecontact from './Component/Contact/updatecontact.js'
 import UpdateEvent from './Component/Event/UpdateEvent.js';
+import UpdateMiracle from './Component/Miracles/UpdateMiracle.js';
+import UpdatePrayer from './Component/Prayers/UpdatePrayer.js';
+import UpdateDirection from './Component/Direction/updateDirection.js';
+import UpdateObe from './Component/Obe/updateObe.js';
+import InsertEvent from './Component/Event/insertEvent.js';
 function App() {
   return (
     <Router>
@@ -25,6 +30,11 @@ function App() {
         <Route path="/Contact" component={Contact} />  
         <Route exact path="/updatecontact" component={updatecontact} />
         <Route exact path="/UpdateEvent" component={UpdateEvent} />
+        <Route exact path="/UpdateMiracle" component={UpdateMiracle}/>
+        <Route exact path="/UpdatePrayer" component={UpdatePrayer}/>
+        <Route exact path="/UpdateDirection" component={UpdateDirection}/> 
+        <Route exact path="/UpdateObe" component={UpdateObe}/>
+        <Route exact path="/InsertEvent" component={InsertEvent} />
       </Switch>
     </Suspense>
       </Router>

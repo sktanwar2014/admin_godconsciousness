@@ -4,8 +4,7 @@ const {dbName} = require("../lib/connection.js");
 const AppModel = function (params) {
   this.title =  params.title;
   this.description = params.description;
-  this.posted_by = params.posted_by;
-  this.posted_on = params.posted_on;
+  this.event_date = params.event_date;
   this.id = params.id;
 };
 
@@ -17,7 +16,7 @@ const AppModel = function (params) {
         }
   
         connection.changeUser({database : dbName});
-        connection.query('SELECT * FROM  events', function (error, rows, fields) { 
+        connection.query('SELECT * FROM  events WHERE is_active = 1', function (error, rows, fields) { 
           if (error) {  console.log("Error...", error); reject(error);  }          
           resolve(rows);              
         });

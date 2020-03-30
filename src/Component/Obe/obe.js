@@ -3,7 +3,7 @@ import Header from '../SubComponent/Header.js'
 import Sidebar from '../SubComponent/Sidebar.js'
 import Footer from '../SubComponent/Footer.js'
 import api from '../../api/APIs.js'
-
+import {Link} from 'react-router-dom'
 export default function Obe() {
  
   const [obes, setobes] = useState([]);
@@ -91,7 +91,7 @@ export default function Obe() {
                               <td>{data.posted_at}</td>
                               <td> 
                                 <center>
-                                  <i class="fas fa-edit" style={{fontSize:'20px', paddingLeft:'10px',fontWeight:'normal'}}></i>
+                                <Link to= {{pathname:"/updateObe", state : {type:'event', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
                                   <i class="fas fa-trash-alt"style={{fontSize:'20px',paddingLeft:'10px',fontWeight:'normal'}}></i>
                                 </center>
                               </td>                          

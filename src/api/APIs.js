@@ -12,9 +12,9 @@ const PARAMS = ({ methodType = 'GET' }) => ({
 
 
 export default {
- getEvents: async ({...payload }) => {
+  getEvents: async ({...payload }) => {
     const URL = `${c.API_CONSUMER}/api/getEvents`;
-    console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
+    // console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
     try {      
         const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }),);
       return data;
@@ -23,10 +23,10 @@ export default {
     }
   },
   updateEvent:async ({...payload }) => {
-    console.log(payload)
+    // console.log(payload)
     const URL = `${c.API_CONSUMER}/api/updateEvent`;
     try {
-      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }),({ data: payload }), {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
         data: payload,
       }),
     );
@@ -36,6 +36,21 @@ export default {
       throw error;
     }
   },
+
+   insertEvent: async ({...payload}) => {
+     const URL =`${c.API_CONSUMER}/api/insertEvent`;
+     try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+      return data;
+    } catch (error) {
+      checkError(error);
+      throw error;
+    }
+
+   },
  
 
   getmiracles: async ({...payload }) => {
@@ -48,16 +63,46 @@ export default {
       throw error;
     }
   },
+  updateMiracle:async ({...payload }) => {
+    // console.log(payload)
+    const URL = `${c.API_CONSUMER}/api/updateMiracle`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+      return data;
+    } catch (error) {
+      checkError(error);
+      throw error;
+    }
+  },
+ 
+
 
   getPrayers: async ({...payload }) => {
     const URL = `${c.API_CONSUMER}/api/getPrayers`;
-    console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
+    // console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
     try {      
         const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }),);
       return data;
     } catch (error) {
       throw error;
     }
+  },
+
+  updatePrayer: async ({...payload}) => {
+    const URL = `${c.API_CONSUMER}/api/updatePrayer`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+    return data;
+  } catch (error) {
+    checkError(error);
+    throw error;
+  }
   },
   getdirection: async ({...payload }) => {
     const URL = `${c.API_CONSUMER}/api/getdirection`;
@@ -69,6 +114,22 @@ export default {
       throw error;
     }
   },
+
+  updateDirection: async ({...payload}) => {
+    const URL = `${c.API_CONSUMER}/api/updateDirection`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+    return data;
+  } catch (error) {
+    checkError(error);
+    throw error;
+  }
+  },
+
+
   getobes: async ({...payload }) => {
     const URL = `${c.API_CONSUMER}/api/getobes`;
     console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
@@ -79,6 +140,22 @@ export default {
       throw error;
     }
   },
+  updateObe: async ({...payload}) => {
+    const URL = `${c.API_CONSUMER}/api/updateObe`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+    return data;
+  } catch (error) {
+    checkError(error);
+    throw error;
+  }
+  },
+
+  
+
   getcontact: async ({...payload }) => {
     const URL = `${c.API_CONSUMER}/api/getcontact`;
     console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))

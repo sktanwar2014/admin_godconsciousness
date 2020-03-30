@@ -126,7 +126,7 @@ export default class Sidebar extends Component {
                 </li>
               </ul>
             </li>
-            <li className="nav-item has-treeview">
+            {/* <li className="nav-item has-treeview">
               <a href="#" className="nav-link">
                 <i className="nav-icon far fa-envelope" />
                 <p>
@@ -135,7 +135,7 @@ export default class Sidebar extends Component {
                 </p>
               </a>
               
-            </li>
+            </li> */}
             
           </ul>
         </nav>
