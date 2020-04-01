@@ -5,6 +5,8 @@ const Events = require('../controllers/Events.js');
 Routing.route("/getEvents").get(Events.getEvents);
 Routing.route("/updateEvent").post(Events.updateEvent);
 Routing.route("/insertEvent").post(Events.insertEvent);
+Routing.route("/handleEventActiveDeactive").post(Events.handleEventActiveDeactive);
+
 
 const Miracles = require('../controllers/Miracles.js');
 Routing.route("/getmiracles").get(Miracles.getmiracles);

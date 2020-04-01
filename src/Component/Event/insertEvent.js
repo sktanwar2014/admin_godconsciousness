@@ -45,8 +45,6 @@ console.log(response)
       }catch(e){
         console.log('Error...',e);
       }
-    }else{
-      alert('Need all fields')
     }
   }
 
@@ -131,7 +129,7 @@ console.log(response)
                       <div className="form-group row">
                         <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Description </label>
                         <div className="col-sm-10">
-                        <input type="text" id="description" class="form-control py-2" value={inputs.description} required/>                          
+                        <input className="form-control boxed" placeholder type="text" value = {inputs.description}  name="description" onChange={handleChange } required />          
                         </div>
                       </div>
                       {/* <div className="form-group row">
@@ -148,7 +146,7 @@ console.log(response)
                       </div> */}
                       <div className="form-group row">
                         <div className="col-sm-10 col-sm-offset-2">
-                          <button type="button"  className="btn btn-primary" onClick={handleSubmit()} style={{marginLeft:'20px'}}>   Update </button>
+                          <button type="button"  className="btn btn-primary" onClick = {handleSubmit()} style={{marginLeft:'20px'}}> Insert </button>
                         </div>
                       </div>                      
                     </div>

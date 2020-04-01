@@ -131,7 +131,7 @@ export default function ObeEditor(mainProps) {
                       <div className="form-group row">
                         <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Description </label>
                         <div className="col-sm-10">
-                        <input type="text" id="description" class="form-control py-2" value={inputs.description} required/>                          
+                        <input className="form-control boxed" placeholder type="text" value = {inputs.description}  name="title" onChange={handleChange } required />                          
                         </div>
                       </div>
                       {/* <div className="form-group row">

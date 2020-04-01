@@ -37,6 +37,21 @@ export default {
     }
   },
 
+  handleEventActiveDeactive:async ({...payload }) => {
+    // console.log(payload)
+    const URL = `${c.API_CONSUMER}/api/handleEventActiveDeactive`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+      return data;
+    } catch (error) {
+      checkError(error);
+      throw error;
+    }
+  },
+
    insertEvent: async ({...payload}) => {
      const URL =`${c.API_CONSUMER}/api/insertEvent`;
      try {

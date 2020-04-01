@@ -13,6 +13,17 @@ export default function EventList() {
   
   const [events, setEvents] = useState([]);
   
+  
+  const handleEventActiveDeactive = async (event) => {
+    try{
+      const result = await APIs.handleEventActiveDeactive({id: event.id, is_active: event.is_active});
+      setEvents(result.eventList);
+    }catch(e){
+      console.log(e);
+    }
+  }
+  
+  
   const fetchEvent = async () => {
     try{
       const result = await APIs.getEvents({});
@@ -21,6 +32,7 @@ export default function EventList() {
       console.log(e);
     }
   }
+
   useEffect(()=>{
     fetchEvent();
   },[]);
@@ -57,8 +69,9 @@ export default function EventList() {
           <div class="col-sm-12">
            
            
-          <div className="col-sm-1"style={{float:'right'}}>  
-          <Link to= {{pathname:"/InsertEvent"}}><button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
+          <div className="col-sm-1"style={{float:'right'}}>
+       
+          <Link to= {{pathname:"/insertEvent", state : {type:'event'}}}> <i class="fas fa-add" style={{fontSize:'20px',fontWeight:'normal'}}>Add</i></Link>
           </div>  
           </div>
         </div>
@@ -97,7 +110,10 @@ export default function EventList() {
                               <td> 
                                 <center>
                                 <Link to= {{pathname:"/updateEvent", state : {type:'event', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
-                                  <i class="fas fa-trash-alt"style={{fontSize:'20px',paddingLeft:'10px',fontWeight:'normal'}}></i>
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" >
+                      <input type="checkbox" onChange={() =>{handleEventActiveDeactive(data)}} checked={data.is_active} class="custom-control-input" id="customSwitch3" />
+                      <label class="custom-control-label" for="customSwitch3"></label>
+                    </div>
                                 </center>
                               </td>                          
                             </tr>

@@ -11,8 +11,25 @@ const getEvents = async function (req, res, next) {
     }
 }
 
+
+const handleEventActiveDeactive = async function (req, res, next) {
+    const params = {
+        id: req.body.id,
+        is_active : req.body.is_active === 1 ? 0 : 1,
+    }
+    try {
+        const newActivity = new Events(params);
+        await newActivity.handleEventActiveDeactive();
+        const result = await newActivity.getEvents();
+        res.send({ eventList: result});              
+    } catch (err) {
+        next(err);
+    }
+}
+
   const insertEvent = async function (req,res,next) {
-      let params = {
+    console.log('req.bodf', req.body)
+    let params = {
           title : req.body.title,
           description:req.body.description 
       }
@@ -25,7 +42,7 @@ const getEvents = async function (req, res, next) {
             res.send(false);
         }        
     } catch (err) {
-        nexAt(err);
+        next(err);
     }
 }
 
@@ -58,6 +75,7 @@ const updateEvent = async function (req, res, next) {
 module.exports = {    
     getEvents : getEvents,
     updateEvent : updateEvent,
-    insertEvent : insertEvent
+    insertEvent : insertEvent, 
+    handleEventActiveDeactive : handleEventActiveDeactive
 
 };
