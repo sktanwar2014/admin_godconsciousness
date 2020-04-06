@@ -9,32 +9,33 @@ import {Redirect} from 'react-router-dom';
 // import api
 import FetchAPI from '../../api/APIs.js';
 
-export default function EventEditor(mainProps) {
+export default function AboutEditor(mainProps) {
   const props = mainProps.location.state;
   
 
- //console.log(props)
+ console.log(props)
 
   
-  const [inputs, setInputs] = useState({id: '', title:'', description:'', posted_by: '',posted_on: ''});  
+  const [inputs, setInputs] = useState({id: '', content:''});  
 
   const handleChange  = (props) => {
     setInputs({...inputs, [props.target.name]: props.target.value});
   }
 
   useEffect(() => {
+    
     if(Object.keys(props)[2] === 'data'){
-      setInputs({title: props.data.title , description: props.data.description})
+      setInputs({id : props.data.id,content: props.data.content})
     }
   },[])
 
 
 
   const handleSubmit = async () => {
-    if(inputs.id !== '',inputs.title !=='' && inputs.description !== '' ){
+    if(inputs.id !== '',inputs.content !==''){
       try{
         
-        const response = await FetchAPI.insertEvent({title: inputs.title, description: inputs.description});
+        const response = await FetchAPI.updateAbout({id:inputs.id,  content: inputs.content});
 console.log(response)
         // if(response.is_successful === true){
         //     mainProps.history.push(pathLink);
@@ -45,6 +46,8 @@ console.log(response)
       }catch(e){
         console.log('Error...',e);
       }
+    }else{
+      alert('Need all fields')
     }
   }
 
@@ -55,10 +58,10 @@ console.log(response)
       method: methodType
     });
 
-    const URL = `http://localhost:5000/api/insertEvent`;
+    const URL = `http://localhost:5000/api/updateAbout`;
     try {
       const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
-        data: { title: inputs.title, description: inputs.description},
+        data: { id: inputs.id,content: inputs.content},
       }),
     );
       return data;
@@ -98,7 +101,7 @@ console.log(response)
                   <div className="title-block">
                     
                     <h3 className="title"> 
-                    Insert Event
+                    Update About
 
 
                     <a href= "/Contact" >
@@ -121,17 +124,17 @@ console.log(response)
                         </div>
                       </div> */}
                       <div className="form-group row">
-                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Title </label>
+                        <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Content </label>
                         <div className="col-sm-10">
-                          <input className="form-control boxed" placeholder type="text" value = {inputs.title}  name="title" onChange={handleChange } required />                          
+                          <input className="form-control boxed" placeholder type="text" value = {inputs.content}  name="content" onChange={handleChange } required />                          
                         </div>
                       </div>
-                      <div className="form-group row">
+                      {/* <div className="form-group row">
                         <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Description </label>
                         <div className="col-sm-10">
-                        <input className="form-control boxed" placeholder type="text" value = {inputs.description}  name="description" onChange={handleChange } required />          
+                        <input type="text" id="description" class="form-control py-2" value={inputs.description} required/>                          
                         </div>
-                      </div>
+                      </div> */}
                       {/* <div className="form-group row">
                         <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Posted_by </label>
                         <div className="col-sm-10">
@@ -146,7 +149,7 @@ console.log(response)
                       </div> */}
                       <div className="form-group row">
                         <div className="col-sm-10 col-sm-offset-2">
-                          <button type="button"  className="btn btn-primary" onClick = {handleSubmit()} style={{marginLeft:'20px'}}> Insert </button>
+                          <button type="button"  className="btn btn-primary" onClick={handleSubmit()} style={{marginLeft:'20px'}}>   Update </button>
                         </div>
                       </div>                      
                     </div>

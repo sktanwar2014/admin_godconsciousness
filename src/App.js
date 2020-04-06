@@ -16,6 +16,11 @@ import UpdatePrayer from './Component/Prayers/UpdatePrayer.js';
 import UpdateDirection from './Component/Direction/updateDirection.js';
 import UpdateObe from './Component/Obe/updateObe.js';
 import InsertEvent from './Component/Event/insertEvent.js';
+import InsertMiracle from './Component/Miracles/insertMIracle.js';
+import InsertPrayer from './Component/Prayers/InsertPrayer.js';
+import InsertDirection from './Component/Direction/InsertDirection.js';
+import UpdateAbout from './Component/AboutGC/AboutGC.js';
+import LoginPage from './Component/Login page/loginpage.js';
 function App() {
   return (
     <Router>
@@ -35,6 +40,11 @@ function App() {
         <Route exact path="/UpdateDirection" component={UpdateDirection}/> 
         <Route exact path="/UpdateObe" component={UpdateObe}/>
         <Route exact path="/InsertEvent" component={InsertEvent} />
+        <Route exact path="/InsertMiracle" component={InsertMiracle} />
+        <Route  exact path="/InsertPrayer" component={InsertPrayer}/>
+        <Route exact path = "/InsertDirection" component={InsertDirection} />
+        <Route exact path = "/UpdateAbout" component={UpdateAbout}/>
+        <Route exact path = "/Loginpage" component={LoginPage}/>
       </Switch>
     </Suspense>
       </Router>

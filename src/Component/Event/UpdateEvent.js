@@ -23,6 +23,7 @@ export default function EventEditor(mainProps) {
   }
 
   useEffect(() => {
+    
     if(Object.keys(props)[2] === 'data'){
       setInputs({id : props.data.id,title: props.data.title , description: props.data.description,posted_by: props.data.posted_by, posted_on: props.data.posted_on })
     }

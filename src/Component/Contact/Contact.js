@@ -4,7 +4,7 @@ import Sidebar from '../SubComponent/Sidebar.js'
 import Footer from '../SubComponent/Footer.js'
 import api from '../../api/APIs.js'
 import { Link } from 'react-router-dom';
-
+//import  {APP_TOKEN} from '../../api/config/Constants'
 export default function Contact() {
  
   const [contacts, setcontacts] = useState([]);
@@ -13,6 +13,9 @@ export default function Contact() {
     try{
       const result = await api.getcontact({});
       setcontacts(result.contactList);
+      //APP_TOKEN.set(result)
+     // APP_TOKEN.get().token
+      //APP_TOKEN.remove()
     }catch(e){
       console.log(e);
     }

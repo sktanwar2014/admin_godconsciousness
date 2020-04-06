@@ -106,7 +106,7 @@ export default class Sidebar extends Component {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="./index.html" className="nav-link active">
+                  <a href="/UpdateAbout" className="nav-link active">
                     <i className="far fa-circle nav-icon" />
                     <p>About GC</p>
                   </a>

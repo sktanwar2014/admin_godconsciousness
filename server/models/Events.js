@@ -19,7 +19,8 @@ const AppModel = function (params) {
         connection.changeUser({database : dbName});
         connection.query('SELECT * FROM  events', function (error, rows, fields) { 
           if (error) {  console.log("Error...", error); reject(error);  }          
-          resolve(rows);              
+          resolve(rows); 
+          //console.log(error);             
         });
           connection.release();
           console.log('Process Complete %d', connection.threadId);

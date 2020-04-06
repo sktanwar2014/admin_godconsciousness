@@ -78,6 +78,38 @@ export default {
       throw error;
     }
   },
+
+  insertMiracle: async ({...payload}) => {
+    const URL =`${c.API_CONSUMER}/api/insertMiracle`;
+    try {
+     const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+       data: payload,
+     }),
+   );
+     return data;
+   } catch (error) {
+     checkError(error);
+     throw error;
+   }
+
+  },
+
+  handleEventActiveDeactive1:async ({...payload }) => {
+    // console.log(payload)
+    const URL = `${c.API_CONSUMER}/api/handleEventActiveDeactive1`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+      return data;
+    } catch (error) {
+      checkError(error);
+      throw error;
+    }
+  },
+
+
   updateMiracle:async ({...payload }) => {
     // console.log(payload)
     const URL = `${c.API_CONSUMER}/api/updateMiracle`;
@@ -106,6 +138,23 @@ export default {
     }
   },
 
+
+     
+  insertPrayer: async ({...payload}) => {
+    const URL =`${c.API_CONSUMER}/api/insertPrayer`;
+    try {
+     const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+       data: payload,
+     }),
+   );
+     return data;
+   } catch (error) {
+     checkError(error);
+     throw error;
+   }
+
+  },
+
   updatePrayer: async ({...payload}) => {
     const URL = `${c.API_CONSUMER}/api/updatePrayer`;
     try {
@@ -128,6 +177,22 @@ export default {
     } catch (error) {
       throw error;
     }
+  },
+
+
+  insertDirection: async ({...payload}) => {
+    const URL =`${c.API_CONSUMER}/api/insertDirection`;
+    try {
+     const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+       data: payload,
+     }),
+   );
+     return data;
+   } catch (error) {
+     checkError(error);
+     throw error;
+   }
+
   },
 
   updateDirection: async ({...payload}) => {
@@ -210,13 +275,17 @@ export default {
   },
 
 
-  getabout: async ({...payload }) => {
-    const URL = `${c.API_CONSUMER}/api/getabout`;
-    console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
-    try {      
-        const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }),);
+  updateAbout:async ({...payload }) => {
+    console.log(payload)
+    const URL = `${c.API_CONSUMER}/api/updateAboutGC`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
       return data;
     } catch (error) {
+      checkError(error);
       throw error;
     }
   },

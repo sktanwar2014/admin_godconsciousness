@@ -1,31 +1,49 @@
-import React, {Component, Fragment,useState, useEffect} from 'react';
-import Header from '../SubComponent/Header.js'
-import Sidebar from '../SubComponent/Sidebar.js'
-import Footer from '../SubComponent/Footer.js'
-import api from '../../api/APIs.js'
+import React,{Component, useState, useEffect} from 'react';
+import Header from '../SubComponent/Header.js';
+import Footer from '../SubComponent/Footer.js';
+import Sidebar from '../SubComponent/Sidebar.js';
 import { Link } from 'react-router-dom';
-export default function Miracle() {
- 
+
+// API Call
+import APIs from '../../api/APIs.js';
+
+
+
+export default function MiracleList() {
+  
+  
   const [miracles, setMiracles] = useState([]);
+  
+  
+  const handleEventActiveDeactive = async (miracle) => {
+     try{
+       const result = await APIs.handleEventActiveDeactive1({id: miracle.id, is_active: miracle.is_active});
+     setMiracles(result.miracleList);
+    
+     }catch(e){
+       console.log(e);
+     }
+   }
+  
   
   const fetchMiracle = async () => {
     try{
-      const result = await api.getmiracles({});
+      const result = await APIs.getmiracles({});
       setMiracles(result.miracleList);
     }catch(e){
       console.log(e);
     }
   }
+
   useEffect(()=>{
     fetchMiracle();
-    
   },[]);
-  
-    return(
-    <Fragment>
-      <Header/>
-      <Sidebar/>
-      <div className="content-wrapper" style={{minHeight: '1200.88px'}}>
+        return(
+            <section>
+              <Header />
+              <Sidebar/>
+              
+                <div className="content-wrapper" style={{minHeight: '1200.88px'}}>
                   {/* Content Header (Page header) */}
                   <section className="content-header">
                     <div className="container-fluid">
@@ -53,8 +71,12 @@ export default function Miracle() {
           <div class="col-sm-12">
            
            
-          <div className="col-sm-1" style={{float:'right'}}>  
-            <button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button>
+          <div className="col-sm-1"style={{float:'right'}}>
+       
+          
+          
+          <Link to= {{pathname:"/insertMiracle", state : {type:'miracle'}}}>  <button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
+          
           </div>  
           </div>
         </div>
@@ -71,7 +93,7 @@ export default function Miracle() {
                   <div className="col-sm-12">
                     <table id="example2" className="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                   <thead>
-                    <tr role="row">
+                  <tr role="row">
                       <th style={{minWidth:'30px'}} tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1} >ID</th>
                       <th  style={{minWidth:'150px'}} tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1}>Title</th>
                       <th  style={{minWidth:'200px'}} tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1}>Description</th>
@@ -86,19 +108,23 @@ export default function Miracle() {
                           return(
                             <tr role="row" className="odd">
                               <td tabIndex={0} className="sorting_1">{index + 1}</td>
-                              <td>{data.title}</td>
-                              <td>{data.descrpition}</td>
+                              <td style={{textAlign:'justify'}}>{data.title}</td>
+                              <td style={{textAlign:'justify'}}>{data.descrpition}</td>
                               <td>{data.created_on}</td>
                               <td>{data.created_by}</td>
                               <td> 
                                 <center>
-                                <Link to= {{pathname:"/updateMiracle", state : {type:'miracle', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
-                                  <i class="fas fa-trash-alt"style={{fontSize:'20px',paddingLeft:'10px',fontWeight:'normal'}}></i>
+                                <Link to= {{pathname:"/updateEvent", state : {type:'event', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
+                                
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" >
+                      <input type="checkbox" onChange={() =>{handleEventActiveDeactive(data)}} checked={data.is_active}  class="custom-control-input" id="customSwitch3" />
+                      <label class="custom-control-label" for="customSwitch3"></label>
+                    </div>
                                 </center>
                               </td>                          
                             </tr>
                           )
-                          })
+                        })
                       }
                     </tbody>
                   
@@ -155,10 +181,25 @@ export default function Miracle() {
     </div>
     {/* /.row */}
   </section>
-
+  {/* /.content */}
+  {/* <script>
+  $(document).ready(function() {
+   
+    $('#example2_paginate').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    })
+  });
+</script> */}
 </div>
-      <Footer/>
-    </Fragment>
-      
-    )
-  }
+
+<Footer />
+
+</section>
+        )
+    }

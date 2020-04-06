@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { render } from "@testing-library/react";
+import Login from '../Login page/loginpage';
 
 export default class Header extends Component {
     render() {
@@ -31,8 +32,8 @@ export default class Header extends Component {
             {/* Right navbar links */}
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">                 
-                <i class="fas fa-sign-out-alt" >  <span>SignOut</span> </i>
+                <a className="nav-link" data-widget="control-sidebar" data-slide="true" href="/Loginpage" role="button">                 
+                <i class="fas fa-sign-out-alt" ><span>SignOut</span> </i>
                 </a>
               </li>
             </ul>

@@ -71,7 +71,10 @@ export default function EventList() {
            
           <div className="col-sm-1"style={{float:'right'}}>
        
-          <Link to= {{pathname:"/insertEvent", state : {type:'event'}}}> <i class="fas fa-add" style={{fontSize:'20px',fontWeight:'normal'}}>Add</i></Link>
+          
+          
+          <Link to= {{pathname:"/insertEvent", state : {type:'event'}}}>  <button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
+          
           </div>  
           </div>
         </div>
@@ -110,6 +113,7 @@ export default function EventList() {
                               <td> 
                                 <center>
                                 <Link to= {{pathname:"/updateEvent", state : {type:'event', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
+                                
                                 <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" >
                       <input type="checkbox" onChange={() =>{handleEventActiveDeactive(data)}} checked={data.is_active} class="custom-control-input" id="customSwitch3" />
                       <label class="custom-control-label" for="customSwitch3"></label>

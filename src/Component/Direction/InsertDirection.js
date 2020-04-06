@@ -9,14 +9,14 @@ import {Redirect} from 'react-router-dom';
 // import api
 import FetchAPI from '../../api/APIs.js';
 
-export default function EventEditor(mainProps) {
+export default function DirectionEditor(mainProps) {
   const props = mainProps.location.state;
   
 
  //console.log(props)
 
   
-  const [inputs, setInputs] = useState({id: '', title:'', description:'', posted_by: '',posted_on: ''});  
+  const [inputs, setInputs] = useState({id: '', title:'', description:''});  
 
   const handleChange  = (props) => {
     setInputs({...inputs, [props.target.name]: props.target.value});
@@ -34,7 +34,7 @@ export default function EventEditor(mainProps) {
     if(inputs.id !== '',inputs.title !=='' && inputs.description !== '' ){
       try{
         
-        const response = await FetchAPI.insertEvent({title: inputs.title, description: inputs.description});
+        const response = await FetchAPI.insertDirection({title: inputs.title, description: inputs.description});
 console.log(response)
         // if(response.is_successful === true){
         //     mainProps.history.push(pathLink);
@@ -55,7 +55,7 @@ console.log(response)
       method: methodType
     });
 
-    const URL = `http://localhost:5000/api/insertEvent`;
+    const URL = `http://localhost:5000/api/insertDirection`;
     try {
       const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
         data: { title: inputs.title, description: inputs.description},
@@ -98,7 +98,7 @@ console.log(response)
                   <div className="title-block">
                     
                     <h3 className="title"> 
-                    Insert Event
+                    Insert Direction
 
 
                     <a href= "/Contact" >

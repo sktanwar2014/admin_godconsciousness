@@ -10,6 +10,28 @@ const getPrayers = async function (req, res, next) {
         next(err);
     }
 }
+
+
+
+const insertPrayer = async function (req,res,next) {
+    // console.log('req.bodf', req.body)
+     let params = {
+          prayer : req.body.prayer,
+            
+       }
+       try {
+         const newActivity = new Prayers(params);
+         const result = await newActivity.insertPrayer();
+         if(result !==undefined && result !== null && result !== ""){
+             res.send(true);
+         }else{
+             res.send(false);
+         }        
+     } catch (err) {
+         next(err);
+     }
+ }
+
 const updatePrayer = async function (req,res,next){
   let params = {
       prayer : req.body.prayer,
@@ -35,6 +57,7 @@ const updatePrayer = async function (req,res,next){
 
 module.exports = {    
     getPrayers : getPrayers,
-    updatePrayer : updatePrayer 
-
+    updatePrayer : updatePrayer, 
+    insertPrayer  : insertPrayer
+    
 };

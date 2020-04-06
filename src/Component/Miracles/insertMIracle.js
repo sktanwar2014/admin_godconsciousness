@@ -9,14 +9,14 @@ import {Redirect} from 'react-router-dom';
 // import api
 import FetchAPI from '../../api/APIs.js';
 
-export default function EventEditor(mainProps) {
+export default function MiracleEditor(mainProps) {
   const props = mainProps.location.state;
   
 
- //console.log(props)
+ console.log(props)
 
   
-  const [inputs, setInputs] = useState({id: '', title:'', description:'', posted_by: '',posted_on: ''});  
+  const [inputs, setInputs] = useState({id: '', title:'', descrpition:'', posted_by: '',posted_on: ''});  
 
   const handleChange  = (props) => {
     setInputs({...inputs, [props.target.name]: props.target.value});
@@ -24,17 +24,17 @@ export default function EventEditor(mainProps) {
 
   useEffect(() => {
     if(Object.keys(props)[2] === 'data'){
-      setInputs({title: props.data.title , description: props.data.description})
+      setInputs({title: props.data.title , descrpition: props.data.descrpition})
     }
   },[])
 
 
 
   const handleSubmit = async () => {
-    if(inputs.id !== '',inputs.title !=='' && inputs.description !== '' ){
+    if(inputs.id !== '',inputs.title !=='' && inputs.descrpition !== '' ){
       try{
         
-        const response = await FetchAPI.insertEvent({title: inputs.title, description: inputs.description});
+        const response = await FetchAPI.insertMiracle({title: inputs.title, descrpition: inputs.descrpition});
 console.log(response)
         // if(response.is_successful === true){
         //     mainProps.history.push(pathLink);
@@ -55,10 +55,10 @@ console.log(response)
       method: methodType
     });
 
-    const URL = `http://localhost:5000/api/insertEvent`;
+    const URL = `http://localhost:5000/api/insertMiracle`;
     try {
       const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
-        data: { title: inputs.title, description: inputs.description},
+        data: { title: inputs.title, descrpition: inputs.descrpition},
       }),
     );
       return data;
@@ -98,7 +98,7 @@ console.log(response)
                   <div className="title-block">
                     
                     <h3 className="title"> 
-                    Insert Event
+                    Insert Miracle
 
 
                     <a href= "/Contact" >
@@ -129,7 +129,7 @@ console.log(response)
                       <div className="form-group row">
                         <label className="col-sm-2 form-control-label text-xs-right" style={{paddingLeft:'30px'}}> Description </label>
                         <div className="col-sm-10">
-                        <input className="form-control boxed" placeholder type="text" value = {inputs.description}  name="description" onChange={handleChange } required />          
+                          <input className="form-control boxed" placeholder type="text" value = {inputs.descrpition}  name="prayer" onChange={handleChange } required />                          
                         </div>
                       </div>
                       {/* <div className="form-group row">

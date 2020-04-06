@@ -11,14 +11,19 @@ Routing.route("/handleEventActiveDeactive").post(Events.handleEventActiveDeactiv
 const Miracles = require('../controllers/Miracles.js');
 Routing.route("/getmiracles").get(Miracles.getmiracles);
 Routing.route("/UpdateMiracle").post(Miracles.updateMiracle);
+Routing.route("/insertMiracle").post(Miracles.insertMiracle)
+Routing.route("/handleEventActiveDeactive").post(Miracles.handleEventActiveDeactive);
+
 
 const Prayers = require('../controllers/Prayers.js');
 Routing.route("/getPrayers").get(Prayers.getPrayers);
 Routing.route("/updatePrayer").post(Prayers.updatePrayer);
+Routing.route("/insertPrayer").post(Prayers.insertPrayer);
 
 const Dir = require('../controllers/Direction.js');
 Routing.route("/getdirection").get(Dir.getdirection);
 Routing.route("/updateDirection").post(Dir.updateDirection);
+Routing.route("/insertDirection").post(Dir.insertDirection)
 
 
 const obe = require('../controllers/obe.js');
@@ -32,7 +37,7 @@ Routing.route("/updateContact").post(contact.updateContact);
 
 
 const about = require('../controllers/about.js');
-Routing.route("/getabout").get(about.getabout);
+Routing.route("/updateAbout").get(about.updateAbout);
 
 // const updatecontact = require('../controllers/updatecontact.js')
 // Routing.route("/changeState").post(updatecontact.changeState);

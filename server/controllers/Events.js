@@ -2,6 +2,7 @@ const Events = require('../models/Events.js');
 
 
 const getEvents = async function (req, res, next) {
+    //console.log('req.bodf', req.body)
     try {
         const newActivity = new Events({});
         const result = await newActivity.getEvents();
@@ -28,7 +29,7 @@ const handleEventActiveDeactive = async function (req, res, next) {
 }
 
   const insertEvent = async function (req,res,next) {
-    console.log('req.bodf', req.body)
+   // console.log('req.bodf', req.body)
     let params = {
           title : req.body.title,
           description:req.body.description 
@@ -49,7 +50,7 @@ const handleEventActiveDeactive = async function (req, res, next) {
   
 
 const updateEvent = async function (req, res, next) {
-    console.log('req.bodf', req.body)
+    //console.log('req.bodf', req.body)
     let params = {
         title : req.body.title,
         description : req.body.description,

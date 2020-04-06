@@ -54,7 +54,7 @@ export default function Miracle() {
            
            
           <div className="col-sm-1" style={{float:'right'}}>  
-            <button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button>
+          <Link to= {{pathname:"/insertPrayer", state : {type:'event'}}}><button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
           </div>  
           </div>
         </div>
