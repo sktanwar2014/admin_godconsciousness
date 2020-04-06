@@ -32,6 +32,7 @@ export default function AboutEditor(mainProps) {
 
 
   const handleSubmit = async () => {
+    
     if(inputs.id !== '',inputs.content !==''){
       try{
         
