@@ -36,7 +36,7 @@ export default function EventEditor(mainProps) {
       try{
         
         const response = await FetchAPI.updateEvent({id:inputs.id,  title: inputs.title, description: inputs.description, posted_by: inputs.posted_by, posted_on: inputs.posted_on });
-console.log(response)
+         console.log(response)
         // if(response.is_successful === true){
         //     mainProps.history.push(pathLink);
         // }else {

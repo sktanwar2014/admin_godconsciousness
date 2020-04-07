@@ -280,8 +280,11 @@ export default {
     const URL = `${c.API_CONSUMER}/api/updateAboutGC`;
     try {
       const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        
         data: payload,
+        
       }),
+
     );
       return data;
     } catch (error) {
