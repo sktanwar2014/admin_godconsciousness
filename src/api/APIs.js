@@ -12,6 +12,23 @@ const PARAMS = ({ methodType = 'GET' }) => ({
 
 
 export default {
+
+  
+  login:async ({...payload }) => {
+    const URL = `${c.API_CONSUMER}/api/login`;
+    try {
+      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
+        data: payload,
+      }),
+    );
+      return data;
+    } catch (error) {
+      checkError(error);
+      throw error;
+    }
+  },
+
+
   getEvents: async ({...payload }) => {
     const URL = `${c.API_CONSUMER}/api/getEvents`;
     // console.log(URL, Object.assign({}, PARAMS({ methodType: 'GET' }), { data: payload }))
@@ -22,6 +39,7 @@ export default {
       throw error;
     }
   },
+
   updateEvent:async ({...payload }) => {
     // console.log(payload)
     const URL = `${c.API_CONSUMER}/api/updateEvent`;

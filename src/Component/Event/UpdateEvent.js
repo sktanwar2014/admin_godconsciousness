@@ -1,9 +1,6 @@
 import React, {useState, useEffect, Fragment } from 'react';
-import axios from 'axios';
-
 import Header from '../SubComponent/Header.js';
 import Sidebar from '../SubComponent/Sidebar.js';
-import {Redirect} from 'react-router-dom';
 
 
 // import api
@@ -12,37 +9,21 @@ import FetchAPI from '../../api/APIs.js';
 export default function EventEditor(mainProps) {
   const props = mainProps.location.state;
   
-
- console.log(props)
-
-  
-  const [inputs, setInputs] = useState({id: '', title:'', description:'', posted_by: '',posted_on: ''});  
-
+  const [inputs, setInputs] = useState({id: '', title:'', description:'', posted_by: '',posted_on: ''});
   const handleChange  = (props) => {
     setInputs({...inputs, [props.target.name]: props.target.value});
   }
 
   useEffect(() => {
-    
     if(Object.keys(props)[2] === 'data'){
       setInputs({id : props.data.id,title: props.data.title , description: props.data.description,posted_by: props.data.posted_by, posted_on: props.data.posted_on })
     }
   },[])
 
-
-
   const handleSubmit = async () => {
     if(inputs.id !== '',inputs.title !=='' && inputs.description !== '' && inputs.posted_by !=='' && inputs.posted_on ){
       try{
-        
         const response = await FetchAPI.updateEvent({id:inputs.id,  title: inputs.title, description: inputs.description, posted_by: inputs.posted_by, posted_on: inputs.posted_on });
-         console.log(response)
-        // if(response.is_successful === true){
-        //     mainProps.history.push(pathLink);
-        // }else {
-        //   if(operation === 'add'){
-        //     alert('operation failed');
-        //   }            
       }catch(e){
         console.log('Error...',e);
       }
@@ -51,41 +32,7 @@ export default function EventEditor(mainProps) {
     }
   }
 
-  async function submitHandle(e) {
-    e.preventDefault();
 
-    const PARAMS = ({ methodType = 'GET' }) => ({
-      method: methodType
-    });
-
-    const URL = `http://localhost:5000/api/updateEvent`;
-    try {
-      const { data } = await axios(URL, Object.assign({}, PARAMS({ methodType: 'POST' }), {
-        data: { id: inputs.id,title: inputs.title, description: inputs.description, posted_by: inputs.posted_by, posted_on: inputs.posted_on},
-      }),
-    );
-      return data;
-    } catch (error) {
-      // checkError(error);
-    }
-//     if(inputs.address !=='' && inputs.phone_no !== '' && inputs.email_add ){
-//       try{
-        
-        // const response = await FetchAPI.updateContent({ id:props.data.id, phone_no: inputs.phone_no, address: inputs.address, email_add: inputs.email_add });
-// console.log(response)
-//         // if(response.is_successful === true){
-//         //     mainProps.history.push(pathLink);
-//         // }else {
-//         //   if(operation === 'add'){
-//         //     alert('operation failed');
-//         //   }            
-//       }catch(e){
-//         console.log('Error...',e);
-//       }
-//     }else{
-      alert('Need all fields')
-    // }
-  }
 
         return (
          <div>

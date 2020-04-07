@@ -7,6 +7,8 @@ const AppModel = function (params) {
   this.event_date = params.event_date;
   this.id = params.id;
   this.is_active = params.is_active;
+  this.event_date = params.event_date;
+  this.updated_on = params.updated_on;
 };
 
  AppModel.prototype.getEvents = function () {
@@ -57,9 +59,9 @@ const AppModel = function (params) {
       if (error) {
         throw error;
       }
-      let Values = [[that.title, that.description,1]];
+      let Values = [[that.title, that.description, that.event_date, 1, 1]];
       connection.changeUser({database : dbName});      
-      connection.query('INSERT INTO events(title, description,is_active) VALUES ?',[Values], function (error, rows, fields) { 
+      connection.query('INSERT INTO events(title, description, event_date, posted_by, is_active) VALUES ?',[Values], function (error, rows, fields) { 
         if (error) {  console.log("Error...", error); reject(error);  } 
         resolve(rows);              
       });
@@ -77,7 +79,7 @@ const AppModel = function (params) {
           throw error;
         }
         connection.changeUser({database : dbName});
-        connection.query('UPDATE events SET title = "'+that.title+'", description = "'+that.description+'", posted_by = "'+that.posted_by+'", posted_on = "'+that.posted_on+'" WHERE id = "'+that.id+'"', function(error,rows,fields){
+        connection.query('UPDATE events SET title = "'+that.title+'", description = "'+that.description+'",  event_date = "'+that.event_date+'", updated_on = now() WHERE id = "'+that.id+'"', function(error,rows,fields){
           if (error) {  console.log("Error...", error); reject(error);  }          
           resolve(rows);              
         });

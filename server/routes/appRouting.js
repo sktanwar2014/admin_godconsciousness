@@ -1,6 +1,11 @@
 const express = require('express')
 const Routing = express.Router();
 
+
+const Auth = require('../controllers/Auth.js');
+Routing.route("/login").post(Auth.login);
+
+
 const Events = require('../controllers/Events.js');
 Routing.route("/getEvents").get(Events.getEvents);
 Routing.route("/updateEvent").post(Events.updateEvent);

@@ -6,14 +6,12 @@ import Footer from './SubComponent/Footer.js';
 export default class Home extends Component {
     render(){
         return(
-
             <div class="wrapper">
-            <Fragment>
-            <Header/>
-            <Sidebar/>
- 
-            <Footer/>
-            </Fragment>
+                <Fragment>
+                    <Header/>
+                    <Sidebar/>
+                    <Footer/>
+                </Fragment>
             </div>
         )
     }

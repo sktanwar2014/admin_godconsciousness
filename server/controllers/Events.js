@@ -2,11 +2,10 @@ const Events = require('../models/Events.js');
 
 
 const getEvents = async function (req, res, next) {
-    //console.log('req.bodf', req.body)
     try {
         const newActivity = new Events({});
         const result = await newActivity.getEvents();
-        res.send({ eventList: result});              
+        res.send({ eventList: result});
     } catch (err) {
         next(err);
     }
@@ -29,19 +28,17 @@ const handleEventActiveDeactive = async function (req, res, next) {
 }
 
   const insertEvent = async function (req,res,next) {
-   // console.log('req.bodf', req.body)
     let params = {
           title : req.body.title,
-          description:req.body.description 
+          description:req.body.description,
+          event_date : req.body.event_date,
       }
       try {
         const newActivity = new Events(params);
-        const result = await newActivity.insertEvent();
-        if(result !==undefined && result !== null && result !== ""){
-            res.send(true);
-        }else{
-            res.send(false);
-        }        
+        const addedResult = await newActivity.insertEvent();
+      
+        const result = await newActivity.getEvents();
+        res.send({ eventList: result});
     } catch (err) {
         next(err);
     }
@@ -50,22 +47,19 @@ const handleEventActiveDeactive = async function (req, res, next) {
   
 
 const updateEvent = async function (req, res, next) {
-    //console.log('req.bodf', req.body)
     let params = {
         title : req.body.title,
         description : req.body.description,
-       posted_by : req.body.posted_by,
-       posted_on : req.body.posted_on,
-       id : req.body.id
+        id : req.body.id,
+        event_date : req.body.event_date,        
     }
     try {
         const newActivity = new Events(params);
-        const result = await newActivity.updateEvent();
-        if(result !==undefined && result !== null && result !== ""){
-            res.send(true);
-        }else{
-            res.send(false);
-        }        
+        await newActivity.updateEvent();
+        
+        const result = await newActivity.getEvents();
+        res.send({ eventList: result});
+
     } catch (err) {
         nexAt(err);
     }
