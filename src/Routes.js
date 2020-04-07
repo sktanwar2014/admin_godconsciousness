@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Switch, Route, Redirect, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Helpers
 import { APP_TOKEN } from './api/config/Constants';
@@ -30,8 +30,7 @@ const Contact = lazy(()=> import('./Component/Contact/Contact.js'));
 
 export default function Routes() {
   return (
-    <Router>
-      <Suspense fallback = {<h3>Loading...</h3>}>
+    <Suspense fallback = {<h3>Loading...</h3>}>
       <Switch>
         <Route exact path="/login"  render={props =>  <Login {...props} /> } />
         <Route exact path="/logout" render={props =>  <Redirect to="/login" /> }/>
@@ -99,7 +98,6 @@ export default function Routes() {
         
       </Switch>
     </Suspense>
-  </Router>
   );
 };
 

@@ -6,9 +6,9 @@ import Routes from './Routes.js';
 
 function App() {
   return (
-      // <Router>
+      <Router>
         <Routes />
-      // </Router>
+      </Router>
   );
 }
 
