@@ -60,6 +60,7 @@ const AppModel = function (params) {
         throw error;
       }
       let Values = [[that.title, that.description, that.event_date, 1, 1]];
+      console.log(Values);
       connection.changeUser({database : dbName});      
       connection.query('INSERT INTO events(title, description, event_date, posted_by, is_active) VALUES ?',[Values], function (error, rows, fields) { 
         if (error) {  console.log("Error...", error); reject(error);  } 

@@ -27,23 +27,22 @@ contact.prototype.getcontact = function () {
   } 
 
   
-contact.prototype.updateContact = function () {
-  const that = this;
-  return new Promise(function (resolve, reject) {
-    connection.getConnection(function (error, connection) {
-      if (error) {
-        throw error;
-      }
-
-      connection.changeUser({database : dbName});
-      connection.query('UPDATE contact SET address = "'+that.address+'", phone_no = "'+that.phone_no+'", email_add = "'+that.email_add+'" WHERE id = "'+that.id+'"' ,function (error, rows, fields) { 
-        if (error) {  console.log("Error...", error); reject(error);  }          
-        resolve(rows);              
-      });
+  contact.prototype.updateContact = function(){
+    const that = this;
+    return new Promise (function(resolve , reject){
+      connection.getConnection(function (error, connection) {
+        if (error) {
+          throw error;
+        }
+        connection.changeUser({database : dbName});
+        connection.query('UPDATE contact SET phone_no  = "'+that.phone_no+'",address = "'+that.address+'", email_add = "'+that.email_add+'" WHERE id = "'+that.id+'"', function(error,rows,fields){
+          if (error) {  console.log("Error...", error); reject(error);  }          
+          resolve(rows);              
+        });
         connection.release();
         console.log('Process Complete %d', connection.threadId);
     });
-  });
-} 
+  }); 
+  }
 
 module.exports = contact;

@@ -4,9 +4,27 @@ import Sidebar from '../SubComponent/Sidebar.js'
 import Footer from '../SubComponent/Footer.js'
 import api from '../../api/APIs.js'
 import {Link} from 'react-router-dom'
-export default function Miracle() {
+import {getDateInDDMMYYYY} from '../../Common/moment.js';
+import Add from './add.js';
+import Update from './update.js';
+
+
+export default function Prayer() {
  
-  const [prayers, setprayers] = useState([]);
+ const [prayers, setprayers] = useState([]);
+  const [rowData, setRowData] = useState([]);
+  const [editOpen, setEditOpen] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
+
+
+  const handleEventActiveDeactive = async (prayer) => {
+    try{
+      const result = await api.handleEventActiveDeactive({id: prayer.id, is_active: prayer.is_active});
+      setprayers(result.PrayersList);
+    }catch(e){
+      console.log(e);
+    }
+  }
   
   const fetchPrayer = async () => {
     try{
@@ -20,6 +38,17 @@ export default function Miracle() {
     fetchPrayer();
     
   },[]);
+
+  const handleEditOpen = (data) => {
+    setRowData(data);
+    setEditOpen(true);
+  }
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  }
+
+
   
     return(
     <Fragment>
@@ -51,14 +80,12 @@ export default function Miracle() {
           <div class="row mb-2">
           
           <div class="col-sm-12">
-           
-           
-          <div className="col-sm-1" style={{float:'right'}}>  
-          <Link to= {{pathname:"/insertPrayer", state : {type:'event'}}}><button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button></Link>
-          </div>  
+              <div className="col-sm-1"style={{float:'right'}}>
+                <button type="button" onClick={()=>{setAddOpen(true)}} class="btn btn-block btn-secondary btn-sm" >Add</button>
+              </div>  
           </div>
-        </div>
-          </div>
+      </div>
+    </div>
           {/* /.card-header */}
 
           <div className="card-body">
@@ -74,9 +101,7 @@ export default function Miracle() {
                     <tr role="row">
                       <th style={{minWidth:'30px'}} tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1} >ID</th>
                       <th  style={{minWidth:'150px'}} tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1}>Prayer</th>
-                 
-                      <th  style={{minWidth:'200px'}}  tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1}>Posted at</th>
-                      <th style={{minWidth:'200px'}} tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1}>Posted by</th>
+                      <th  style={{minWidth:'200px'}}  tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1}>Event Date</th>
                       <th style={{minWidth:'100px'}} tabIndex={0} aria-controls="example2" rowSpan={1} colSpan={1}>Action</th>
                     </tr>
                   </thead>
@@ -87,14 +112,14 @@ export default function Miracle() {
                             <tr role="row" className="odd">
                               <td tabIndex={0} className="sorting_1">{index + 1}</td>
                               <td>{data.prayer}</td>
-                              <td>{data.created_at}</td>
-                              <td>{data.created_by}</td>
-                              <td> 
-                                <center>
-                                <Link to= {{pathname:"/updatePrayer", state : {type:'miracle', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
-                                  <i class="fas fa-trash-alt"style={{fontSize:'20px',paddingLeft:'10px',fontWeight:'normal'}}></i>
-                                </center>
-                              </td>                          
+                              <td>{getDateInDDMMYYYY(data.event_date)}</td>
+                              <td>
+                                <a onClick={()=>{handleEditOpen(data)}}><i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></a>
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" >
+                                  <input type="checkbox" onChange={() =>{handleEventActiveDeactive(data)}} checked={data.is_active} class="custom-control-input" id="customSwitch3" />
+                                  <label class="custom-control-label" for="customSwitch3"></label>
+                                </div>
+                              </td>                         
                             </tr>
                           )
                           })
@@ -153,8 +178,11 @@ export default function Miracle() {
       {/* /.col */}
     </div>
     {/* /.row */}
-  </section>
 
+    {editOpen ? <Update open={editOpen} handleClose = {handleEditClose} rowData = {rowData} setprayers = {setprayers} /> : null}  
+    {addOpen ? <Add open={addOpen} handleClose = {setAddOpen} setprayers = {setprayers} /> : null}
+  </section>
+     
 </div>
       <Footer/>
     </Fragment>

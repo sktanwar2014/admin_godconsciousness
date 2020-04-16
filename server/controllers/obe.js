@@ -5,26 +5,27 @@ const getobes = async function (req, res, next) {
     try {
         const newActivity = new obe({});
         const result = await newActivity.getobes();
-        res.send({ obeiLst: result});              
+        res.send({ obeList: result});              
     } catch (err) {
         next(err);
     }
 }
 
-const updateObe = async function (req,res,next) {
-    let params = {
-        description: req.body.description
-        
-    }
 
-    try{
+const updateObe = async function (req, res, next) {
+    let params = {
+        
+        description : req.body.description,
+        id : req.body.id,
+       updated_by : req.body.updated_by,    
+    }
+    try {
         const newActivity = new obe(params);
-        const result = await newActivity.updateObe();
-        if(result !==undefined && result !== null && result !== ""){
-            res.send(true);
-        }else{
-            res.send(false);
-        } 
+        await newActivity.updateObe();
+        
+        const result = await newActivity.getobes();
+        res.send({ obeList: result});
+
     } catch (err) {
         next(err);
     }

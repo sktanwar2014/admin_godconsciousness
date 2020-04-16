@@ -31,9 +31,9 @@ export default function Login(props) {
           <div className="container-login100" style={{backgroundImage: 'url("images/bg-01.jpg")'}}>
             <div className="wrap-login100">
               <form onSubmit={handleLogin} className="login100-form validate-form">
-                <span className="login100-form-logo">
-                  <i className="zmdi zmdi-landscape" />
-                </span>
+                 <span className="login100-form-logo">
+                   <i className="zmdi zmdi-landscape" /> 
+                 </span>  
                 <span className="login100-form-title p-b-34 p-t-27">
                   Log in
                 </span>

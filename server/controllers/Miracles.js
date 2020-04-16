@@ -27,44 +27,39 @@ const handleEventActiveDeactive = async function (req, res, next) {
 }
 
 const insertMiracle = async function (req,res,next) {
-    // console.log('req.bodf', req.body)
+  
      let params = {
            title : req.body.title,
-           descrpition:req.body.descrpition
+           descrpition:req.body.descrpition,
+           event_date : req.body.event_date,
        }
        try {
-         const newActivity = new Miracles(params);
-         const result = await newActivity.insertMiracle();
-         if(result !==undefined && result !== null && result !== ""){
-             res.send(true);
-         }else{
-             res.send(false);
-         }        
-     } catch (err) {
+        const newActivity = new Miracles(params);
+        const addedResult = await newActivity.insertMiracle();
+      
+        const result = await newActivity.getMiracles();
+        res.send({ miracleList: result});
+    } catch (err) {
          next(err);
      }
  }
 
 
 
-
-const updateMiracle = async function (req, res, next) {
-    console.log('req.body', req.body)
+ const updateMiracle = async function (req, res, next) {
     let params = {
         title : req.body.title,
         descrpition : req.body.descrpition,
-        created_by : req.body.created_by,
-        created_on : req.body.created_on,
-        id : req.body.id
+        id : req.body.id,
+        event_date : req.body.event_date,        
     }
     try {
         const newActivity = new Miracles(params);
-        const result = await newActivity.updateMiracle();
-        if(result !==undefined && result !== null && result !== ""){
-            res.send(true);
-        }else{
-            res.send(false);
-        }        
+        await newActivity.updateMiracle();
+        
+        const result = await newActivity.getMiracles();
+        res.send({ miracleList: result});
+
     } catch (err) {
         nexAt(err);
     }

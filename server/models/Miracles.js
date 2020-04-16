@@ -8,6 +8,8 @@ const Miracles = function (params) {
   this.created_on = params.created_on;
   this.id  = params.id;
   this.is_active = params.is_active;
+  this.event_date = params.event_date;
+  this.updated_on = params.updated_on;
 };
 
 Miracles.prototype.getMiracles = function () {
@@ -54,9 +56,10 @@ Miracles.prototype.getMiracles = function () {
       if (error) {
         throw error;
       }
-      let Values = [[that.title, that.description,1]];
+      let Values = [[that.title, that.descrpition, that.event_date, 1, 1]];
+      console.log(Values);
       connection.changeUser({database : dbName});      
-      connection.query('INSERT INTO miracle (title, descrpition,is_active) VALUES ?',[Values], function (error, rows, fields) { 
+      connection.query('INSERT INTO miracle(title, descrpition, event_date, created_by, is_active) VALUES ?',[Values], function (error, rows, fields) { 
         if (error) {  console.log("Error...", error); reject(error);  } 
         resolve(rows);              
       });
@@ -67,23 +70,23 @@ Miracles.prototype.getMiracles = function () {
 }
 
 
-  Miracles.prototype.updateMiracle = function(){
-    const that = this;
-    return new Promise (function(resolve , reject){
-      connection.getConnection(function (error, connection) {
-        if (error) {
-          throw error;
-        }
-        connection.changeUser({database : dbName});
-        connection.query('UPDATE miracle SET title = "'+that.title+'", descrpition = "'+that.descrpition+'",created_by = "'+that.created_by+'", created_on = "'+that.created_on+'" WHERE id = "'+that.id+'"', function(error,rows,fields){
-          if (error) {  console.log("Error...", error); reject(error);  }          
-          resolve(rows);              
-        });
-        connection.release();
-        console.log('Process Complete %d', connection.threadId);
-    });
-  }); 
-  }
+Miracles.prototype.updateMiracle = function(){
+  const that = this;
+  return new Promise (function(resolve , reject){
+    connection.getConnection(function (error, connection) {
+      if (error) {
+        throw error;
+      }
+      connection.changeUser({database : dbName});
+      connection.query('UPDATE miracle SET title = "'+that.title+'", descrpition = "'+that.descrpition+'",  event_date = "'+that.event_date+'", updated_on = now() WHERE id = "'+that.id+'"', function(error,rows,fields){
+        if (error) {  console.log("Error...", error); reject(error);  }          
+        resolve(rows);              
+      });
+      connection.release();
+      console.log('Process Complete %d', connection.threadId);
+  });
+}); 
+}
   
 
 

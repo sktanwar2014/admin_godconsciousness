@@ -3,15 +3,21 @@ import Header from '../SubComponent/Header.js'
 import Sidebar from '../SubComponent/Sidebar.js'
 import Footer from '../SubComponent/Footer.js'
 import api from '../../api/APIs.js'
-import {Link} from 'react-router-dom'
+import Update  from './update.js';
+
+
+
 export default function Obe() {
  
   const [obes, setobes] = useState([]);
+  const [rowData, setRowData] = useState([]);
+  const [editOpen, setEditOpen] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
   
   const fetchobe = async () => {
     try{
       const result = await api.getobes({});
-      setobes(result.obeiLst);
+      setobes(result.obeList);
       console.log(result);
     }catch(e){
       console.log(e);
@@ -21,6 +27,15 @@ export default function Obe() {
     fetchobe();
     
   },[]);
+
+  const handleEditOpen = (data) => {
+    setRowData(data);
+    setEditOpen(true);
+  }
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  }
   
     return(
     <Fragment>
@@ -54,9 +69,9 @@ export default function Obe() {
           <div class="col-sm-12">
            
            
-          <div className="col-sm-1" style={{float:'right'}}>  
-            <button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button>
-          </div>  
+          {/* <div className="col-sm-1" style={{float:'right'}}>  
+          <button type="button" onClick={()=>{setAddOpen(true)}} class="btn btn-block btn-secondary btn-sm" >Add</button>
+          </div>   */}
           </div>
         </div>
           </div>
@@ -89,12 +104,10 @@ export default function Obe() {
                               <td>{data.description}</td>
                               <td>{data.posted_by}</td>
                               <td>{data.posted_at}</td>
-                              <td> 
-                                <center>
-                                <Link to= {{pathname:"/updateObe", state : {type:'event', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
-                                  <i class="fas fa-trash-alt"style={{fontSize:'20px',paddingLeft:'10px',fontWeight:'normal'}}></i>
-                                </center>
-                              </td>                          
+                              <td>
+                                        <a onClick={()=>{handleEditOpen(data)}}><i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></a>
+                                      
+                                      </td>                          
                             </tr>
                           )
                           })
@@ -153,6 +166,7 @@ export default function Obe() {
       {/* /.col */}
     </div>
     {/* /.row */}
+    {editOpen ? <Update open={editOpen} handleClose = {handleEditClose} rowData = {rowData} setobes = {setobes} /> : null}
   </section>
 
 </div>

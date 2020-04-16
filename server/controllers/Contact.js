@@ -14,23 +14,23 @@ const getcontact = async function (req, res, next) {
 
 const updateContact = async function (req, res, next) {
     let params = {
-        phone_no : req.body.phone_no,
-        email_add : req.body.email_add,
-        address: req.body.address,
-        id: req.body.id,
+        phone_no : req.body.phone_no,             
+        address : req.body.address,
+        id : req.body.id,
+       email_add : req.body.email_add,    
     }
     try {
         const newActivity = new contacts(params);
-        const result = await newActivity.updateContact();
-        if(result !==undefined && result !== null && result !== ""){
-            res.send(true);
-        }else{
-            res.send(false);
-        }        
+        await newActivity.updateContact();
+        
+        const result = await newActivity.getcontact();
+        res.send({ contactList: result});
+
     } catch (err) {
-        nexAt(err);
+        next(err);
     }
 }
+
 
 
 

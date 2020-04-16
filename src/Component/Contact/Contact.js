@@ -4,11 +4,14 @@ import Sidebar from '../SubComponent/Sidebar.js'
 import Footer from '../SubComponent/Footer.js'
 import api from '../../api/APIs.js'
 import { Link } from 'react-router-dom';
+import Update from './update.js';
 //import  {APP_TOKEN} from '../../api/config/Constants'
 export default function Contact() {
  
   const [contacts, setcontacts] = useState([]);
-  
+  const [rowData, setRowData] = useState([]);
+  const [editOpen, setEditOpen] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
   const fetchcontacts = async () => {
     try{
       const result = await api.getcontact({});
@@ -24,6 +27,16 @@ export default function Contact() {
     fetchcontacts();
     
   },[]);
+
+  const handleEditOpen = (data) => {
+    setRowData(data);
+    setEditOpen(true);
+  }
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  }
+
   
     return(
     <Fragment>
@@ -53,13 +66,10 @@ export default function Contact() {
         <div className="card">
           <div className="card-header">
           <div class="row mb-2">
-          
           <div class="col-sm-12">
-           
-           
-          <div className="col-sm-1" style={{float:'right'}}>  
-            <button type="button" class="btn btn-block btn-secondary btn-sm" >Add</button>
-          </div>  
+           {/* <div className="col-sm-1"style={{float:'right'}}>
+             <button type="button" onClick={()=>{setAddOpen(true)}} class="btn btn-block btn-secondary btn-sm" >Add</button>
+            </div>    */}
           </div>
         </div>
           </div>
@@ -93,13 +103,9 @@ export default function Contact() {
                               <td>{data.address}</td>
                               <td>{data.phone_no}</td>
                               <td>{data.email_add}</td>
-                             
-                              <td> 
-                                <center>
-                                <Link to= {{pathname:"/updateContact", state : {type:'contact', operation: 'update', data: data}}}> <i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></Link>
-                     
-                                </center>
-                              </td>                          
+                              <td>
+                                <a onClick={()=>{handleEditOpen(data)}}><i class="fas fa-edit" style={{fontSize:'20px',fontWeight:'normal'}}></i></a>
+                              </td>    
                             </tr>
                           )
                           })
@@ -123,6 +129,7 @@ export default function Contact() {
       {/* /.col */}
     </div>
     {/* /.row */}
+    {editOpen ? <Update open={editOpen} handleClose = {handleEditClose} rowData = {rowData} setcontacts = {setcontacts} /> : null} 
   </section>
 
 </div>

@@ -13,23 +13,22 @@ const getdirection = async function (req, res, next) {
     
 
 const insertDirection = async function (req,res,next) {
-    // console.log('req.bodf', req.body)
-     let params = {
-           title : req.body.title,
-           description:req.body.description 
-       }
-       try {
-         const newActivity = new Directions(params);
-         const result = await newActivity.insertDirection();
-         if(result !==undefined && result !== null && result !== ""){
-             res.send(true);
-         }else{
-             res.send(false);
-         }        
-     } catch (err) {
-         next(err);
-     }
- }
+  
+    let params = {
+          title : req.body.title,
+          description:req.body.description,
+          //event_date : req.body.event_date,
+      }
+      try {
+       const newActivity = new Directions(params);
+       const addedResult = await newActivity.insertDirection();
+     
+       const result = await newActivity.getdirection();
+       res.send({ directionList: result});
+   } catch (err) {
+        next(err);
+    }
+}
  
 
 const updateDirection = async function(req,res,next){
