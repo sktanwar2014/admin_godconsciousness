@@ -1,53 +1,17 @@
-const express = require('express')
+const express = require('express');
+
+const AppController = require('../controllers/AppController.js');
+const validateToken = require('../utils/utils.js').validateToken;
+
 const Routing = express.Router();
 
 
-const Auth = require('../controllers/Auth.js');
-Routing.route("/login").post(Auth.login);
+Routing.route("/login").post(AppController.login);
+Routing.route("/getPrevBannerImage").post(validateToken, AppController.getPrevBannerImage);
+Routing.route("/updateBannerProduct").post(validateToken, AppController.updateBannerProduct);
+Routing.route("/addUpdateFormContent").post(validateToken, AppController.addUpdateFormContent);
+Routing.route("/getTabRelatedList").post(validateToken, AppController.getTabRelatedList);
+Routing.route("/changeState").post(validateToken, AppController.changeState);
 
-
-const Events = require('../controllers/Events.js');
-Routing.route("/getEvents").get(Events.getEvents);
-Routing.route("/updateEvent").post(Events.updateEvent);
-Routing.route("/insertEvent").post(Events.insertEvent);
-Routing.route("/handleEventActiveDeactive").post(Events.handleEventActiveDeactive);
-
-
-const Miracles = require('../controllers/Miracles.js');
-Routing.route("/getmiracles").get(Miracles.getmiracles);
-Routing.route("/UpdateMiracle").post(Miracles.updateMiracle);
-Routing.route("/insertMiracle").post(Miracles.insertMiracle)
-Routing.route("/handleEventActiveDeactive").post(Miracles.handleEventActiveDeactive);
-
-
-const Prayers = require('../controllers/Prayers.js');
-Routing.route("/getPrayers").get(Prayers.getPrayers);
-Routing.route("/updatePrayer").post(Prayers.updatePrayer);
-Routing.route("/insertPrayer").post(Prayers.insertPrayer);
-
-const Dir = require('../controllers/Direction.js');
-Routing.route("/getdirection").get(Dir.getdirection);
-Routing.route("/updateDirection").post(Dir.updateDirection);
-Routing.route("/insertDirection").post(Dir.insertDirection)
-
-
-const obe = require('../controllers/obe.js');
-Routing.route("/getobes").get(obe.getobes);
-Routing.route("/updateObe").post(obe.updateObe);
-
-
-const contact = require('../controllers/Contact.js');
-Routing.route("/getcontact").get(contact.getcontact);
-Routing.route("/updateContact").post(contact.updateContact);
-
-
-const about = require('../controllers/about.js');
-Routing.route("/updateAbout").get(about.updateAbout);
-
-// const updatecontact = require('../controllers/updatecontact.js')
-// Routing.route("/changeState").post(updatecontact.changeState);
-
-// const addevent = require('../controllers/addevent.js')
-// Routing.route("/addevent").post(addevent.addevent );
 
 module.exports = Routing;

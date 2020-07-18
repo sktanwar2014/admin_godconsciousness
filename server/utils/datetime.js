@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-export function getDate(date) {
+function getDate(date) {
   return moment(date).format("YYYY-MM-DD");
 }
 
@@ -11,7 +11,6 @@ function getCurrentDateDBFormat() {
 
 function getCurrentDate() {
   return moment().format("MM/DD/YYYY")
-  
 }
 
 
@@ -19,11 +18,11 @@ function getCurrentDateInYYYYMMDD() {
   return moment().format("YYYY/MM/DD")
 }
 
-export function getDateInDDMMYYYY(date) {
+function getDateInDDMMYYYY(date) {
   return moment(date).format("DD-MM-YYYY")
 }
 
- function getCurrentDateDDMMYYYY() {
+function getCurrentDateDDMMYYYY() {
   return moment().format("DD-MM-YYYY")
 }
 
@@ -82,3 +81,5 @@ function checkOverDue(payment_date, settlement_date) {
 function escapeSunday(date){
   return moment(date).format("dddd") == "Sunday";
 }
+
+module.exports = { setDBDateFormat, isSameDate, checkOverDue, addOneDay, getCurrentDateDBFormat, escapeSunday };
