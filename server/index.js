@@ -56,7 +56,7 @@ let port ='';
 if(env === 'local'){
     port = 5001;
 }else if(env === 'prod'){
-    port = 3007;
+    port = 3016;
 }
 
 const server = http.createServer(app);
