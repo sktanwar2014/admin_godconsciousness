@@ -8,7 +8,7 @@ if(env === 'prod'){
       host: 'localhost',
       user: 'root',
       port: 3306,
-      password: '',
+      password: '6mNMX9Ln0oykXKic',
       database: dbName,
    };
 }else{

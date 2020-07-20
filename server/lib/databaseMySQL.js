@@ -1,11 +1,11 @@
 const env = 'local';
-let DbName = 'a1abiliti_newgc';
-let domainName = 'localhost:5001';
+let DbName = 'connectiv_gc';
+let domainName = 'http://gcadmin.connectivitysoftwaresolutions.com';
 
 console.log('env...', env);
 
 if (env === 'prod') {
-  DbName = 'a1abiliti_newgc';
+  DbName = 'connectiv_gc';
   domainName = 'appoint.a1abilities.co.nz'
 } else {  
   DbName = 'godconsciousness'
